@@ -8,6 +8,7 @@ import{ notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 
 import productRoutes from './routes/productRoutes.js'
+import orgRoutes from './routes/orgRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
@@ -29,8 +30,8 @@ app.get('/', (req, res) => {
     res.send('API is running...')
 })
 
-app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
+app.use('/api/organisations', orgRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/upload', uploadRoutes)
 

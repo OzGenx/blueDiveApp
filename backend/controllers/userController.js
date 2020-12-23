@@ -13,7 +13,8 @@ const authUser = asyncHandler(async (req, res) => {
     if (user && (await user.matchPassword(password))) {
         res.json({
             _id: user._id,
-            name: user.name,
+            firstname: user.firstname,
+            lastname: user.lastname,
             email: user.email,
             isAdmin: user.isAdmin,
             token: generateToken(user._id)
@@ -29,7 +30,7 @@ const authUser = asyncHandler(async (req, res) => {
 // @route POST /api/users
 // @access Public (Public does not require a token to access)
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password } = req.body
+    const { firstname, lastname, email, password } = req.body
 
     const userExists = await User.findOne({ email })
 
@@ -39,7 +40,8 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     const user = await User.create({
-        name,
+        firstname,
+        lastname,
         email,
         password
     })
@@ -47,7 +49,8 @@ const registerUser = asyncHandler(async (req, res) => {
     if(user) {
         res.status(201).json({
             _id: user._id,
-            name: user.name,
+            firstname: user.firstname,
+            lastname: user.lastname,
             email: user.email,
             isAdmin: user.isAdmin,
             token: generateToken(user._id)
@@ -69,7 +72,8 @@ const getUserProfile = asyncHandler(async (req, res) => {
     if(user) {
         res.json({
             _id: user._id,
-            name: user.name,
+            firstname: user.firstname,
+            lastname: user.lastname,
             email: user.email,
             isAdmin: user.isAdmin
         })
@@ -88,7 +92,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id)
 
     if(user) {
-        user.name = req.body.name || user.name
+        user.firstname = req.body.firstname || user.firstname
+        user.lastname = req.body.lastname || user.lastname
         user.email= req.body.email || user.email
         if (req.body.password) {
             user.password = req.body.password
@@ -97,7 +102,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
         const updatedUser = await user.save()
         res.json({
             _id: updatedUser._id,
-            name: updatedUser.name,
+            firstname: updatedUser.firstname,
+            lastname: updatedUser.lastname,
             email: updatedUser.email,
             isAdmin: updatedUser.isAdmin,
             token: generateToken(updatedUser._id)
@@ -153,14 +159,16 @@ const updateUser = asyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id)
 
     if(user) {
-        user.name = req.body.name || user.name
+        user.firstname = req.body.firstname || user.firstname
+        user.lastname = req.body.lastname || user.lastname
         user.email= req.body.email || user.email
         user.isAdmin= req.body.isAdmin
 
         const updatedUser = await user.save()
         res.json({
             _id: updatedUser._id,
-            name: updatedUser.name,
+            firstname: updatedUser.firstname,
+            lastname: updatedUser.lastname,
             email: updatedUser.email,
             isAdmin: updatedUser.isAdmin
         })

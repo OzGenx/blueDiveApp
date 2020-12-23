@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 
 import {useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Col, Row } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Col, Row, Button } from 'react-bootstrap'
 import Product from '../components/Product'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -38,9 +39,24 @@ const HomeScreen = ({ match }) => {
      return (
         <>
             <Meta />
+                                   
             
             {!keyword ?  <ProductCarousel />  : <Link to='/' className='btn btn-light'>Go Back</Link>}
             <h1>Latest Products</h1>
+            <Row>
+                <Col md={2}>
+                    <p>
+                <LinkContainer to={'/organisations'}>
+                                            <Button className='btn-sm' variant='light'>Organisations</Button>
+                                        </LinkContainer>
+                                        </p>
+                                        <p>
+             <LinkContainer to={'/createorganisation'}>
+                                            <Button className='btn-sm' variant='light'>Add New Organisation</Button>
+                                        </LinkContainer> 
+                                        </p>
+
+                </Col>
     {loading ? <Loader /> : error ? (<Message variant='danger'>{error} </Message> ): 
                 ( <>
                 <Row>
@@ -51,8 +67,10 @@ const HomeScreen = ({ match }) => {
                 ))}
                 
             </Row>
+
             <Paginate pages={pages} page={page} keyword={keyword ? keyword : ''} />
             </>) }
+            </Row>
      
         </>
     )

@@ -18,6 +18,8 @@ import UserEditScreen from './screens/UserEditScreen'
 import ProductListScreen from './screens/ProductListScreen'
 import ProductEditScreen from './screens/ProductEditScreen'
 import OrderListScreen from './screens/OrderListScreen'
+import OrganisationsScreen from './screens/OrganisationsScreen';
+import OrganisationCreateScreen from './screens/OrganisationCreateScreen';
 
 
 
@@ -30,13 +32,15 @@ const App = () => {
         <Container>
           <Route path='/login' component={LoginScreen} />
           <Route path='/register' component={RegisterScreen} />
+          <Route path='/organisations' component={OrganisationsScreen} />
+          <Route path='/createorganisation' component={OrganisationCreateScreen} />
           <Route path='/order/:id' component={OrderScreen} />
           <Route path='/payment' component={PaymentScreen} />
           <Route path='/placeorder' component={PlaceOrderScreen} />
           <Route path='/profile' component={ProfileScreen} />
           <Route path='/shipping' component={ShippingScreen} />
           <Route path='/product/:id' component={ProductScreen} />
-          {/* ? on id makes id optional */}
+                    {/* ? on id makes id optional */}
           <Route path='/cart/:id?' component={CartScreen} />
           <Route path='/admin/userlist' component={UserListScreen} />
           <Route path='/admin/user/:id/edit' component={UserEditScreen} />          

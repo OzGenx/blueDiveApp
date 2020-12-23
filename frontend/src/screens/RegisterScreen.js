@@ -8,7 +8,8 @@ import FormContainer from '../components/FormContainer'
 import { register } from '../actions/userActions'
 
 const RegisterScreen = ({ location, history }) => {
-  const [name, setName] = useState('')
+  const [firstname, setFirstName] = useState('')
+  const [lastname, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -32,7 +33,7 @@ const RegisterScreen = ({ location, history }) => {
     if (password !== confirmPassword) {
       setMessage('Passwords do not match')
     } else {
-      dispatch(register(name, email, password))
+      dispatch(register(firstname, lastname, email, password))
     }
   }
 
@@ -43,13 +44,23 @@ const RegisterScreen = ({ location, history }) => {
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
-        <Form.Group controlId='name'>
-          <Form.Label>Name</Form.Label>
+        <Form.Group controlId='firstname'>
+          <Form.Label>First Name</Form.Label>
           <Form.Control
-            type='name'
-            placeholder='Enter name'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            type='firstname'
+            placeholder='Enter First Name'
+            value={firstname}
+            onChange={(e) => setFirstName(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId='lastname'>
+          <Form.Label>Last Name</Form.Label>
+          <Form.Control
+            type='lastname'
+            placeholder='Enter last name'
+            value={lastname}
+            onChange={(e) => setLastName(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
